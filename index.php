@@ -1,3 +1,11 @@
+<?php
+//session_start();
+// Include functions.php and connect to the database
+include_once 'functions.php';
+//$pdo = pdo_connect_mysql();
+
+
+?>
 
 <html>
 <head>
