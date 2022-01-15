@@ -4957,7 +4957,7 @@ textarea.form-control-lg {
 
 .alert-danger {
   color: #842029;
-  background-color: #f8d7da;
+  background-color: white;
   border-color: #f5c2c7;
 }
 .alert-danger .alert-link {
@@ -11273,10 +11273,11 @@ textarea.form-control-lg {
   padding: 2%;
   float: left;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 25px;
   border: blue solid 1px;
-  font-family: "Bahnschrift";
+  font-family: "Bahnschrift", sans-serif, sans;
   text-align: center;
+
 }
 .restau-img img{
   width: 50%;

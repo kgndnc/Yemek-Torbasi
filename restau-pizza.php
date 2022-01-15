@@ -1,23 +1,18 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pizza</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
 <?php
+session_start();
+$_SESSION['table'] = 'pizza-0001';
+$table = $_SESSION['table'];
 // Include functions and connect to the database using PDO MySQL
 include_once 'functions.php';
 $pdo = pdo_connect_mysql();
-$stmt = $pdo->prepare("SELECT * FROM `pizza-0001`  \n"
+$stmt = $pdo->prepare("SELECT * FROM `$table` "
 
-    . "ORDER BY `pizza-0001`.`total_sale` ASC;");
+    . "ORDER BY `total_sale` ASC");
 $stmt->execute();
 
 $food_for_sale = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$page_name = "Pizza";
 
 include 'layout/top.php';
 ?>
@@ -26,7 +21,7 @@ include 'layout/top.php';
     <div class="products">
         <?php foreach ($food_for_sale as $product): ?>
             <div class="restau-box">
-                <a href="product.php?id=<?=$product['id']?>&table=pizza-0001" class="product">
+                <a href="product.php?id=<?=$product['id']?>" class="product">
                     <!--                <img src="img/--><?//=$product['food_name']?><!--" width="200" height="200" alt="--><?//=$product['name']?><!--">-->
                     <span class=""><?=$product['food_name']?></span>
                     <span class="">
@@ -45,5 +40,3 @@ include 'layout/top.php';
 <?php
 include 'layout/bottom.php';
 ?>
-</body>
-</html>

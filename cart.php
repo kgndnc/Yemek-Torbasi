@@ -7,7 +7,7 @@ if (isset($_POST['id'], $_POST['quantity']) && is_numeric($_POST['id']) && is_nu
     // Set the post variables so we easily identify them, also make sure they are integer
     $product_id = (int)$_POST['id'];
     $quantity = (int)$_POST['quantity'];
-    // Prepare the SQL statement, we basically are checking if the product exists in our databaser
+    // Prepare the SQL statement, we basically are checking if the product exists in our database
     $stmt = $pdo->prepare('SELECT * FROM `' . $_POST['table'] . '` WHERE id = ?');
     $stmt->execute([$_POST['id']]);
     // Fetch the product from the database and return the result as an Array
