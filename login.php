@@ -26,7 +26,7 @@ if (isset($_SESSION['user_id'])  && !empty($_SESSION['user_id']) ) {
         </div>
         <div class="input-group mb-3">
             <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
-            <input value="Show password" type="button" onclick="changeVisibility()" style="margin-left:1px" >
+            <input value="Show password" type="button" onclick="changeVisibility('password')" style="margin-left:1px" >
         </div>
         <input type="submit" value="Giriş yap">
         <a class="link-primary m-3" href="signup.php">Kaydol</a>

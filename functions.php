@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 function connect_to_db () {
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -29,7 +30,9 @@ function check_login()
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['user_name'] = $row['user_name'];
         $_SESSION['loginErr'] = null;
+        $_SESSION['signupErr'] = null;
         header("Location: index.php");
+        die();
     } else {
         $_SESSION['user_id'] = null;
         $_SESSION['user_name'] = null;
@@ -69,7 +72,7 @@ function acc_details() {
     </table>';
 }
 
-function random_num($length): string
+function random_num($length): int
 {
     $text = "";
     if ($length < 5) {
@@ -81,5 +84,9 @@ function random_num($length): string
         $text .= rand(0, 9);
     }
     // generating a random user_id at different lengths
-    return $text;
+    return (int) $text;
+}
+
+function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }

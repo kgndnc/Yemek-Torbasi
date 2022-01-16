@@ -1,49 +1,47 @@
 <?php
-session_start();
-    include 'functions.php';
+include 'functions.php';
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // something was posted
-        $user_name = $_POST['user_name']; // form's name value
-        $password = $_POST['password']; // form's name value
+// To all pages you want to check the user logged in put the lines above.
+$page_name= "Kaydol";
+include 'layout/top.php';
 
-        if(!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
-            // if everything's legit save to database
-            $user_id = random_num(20); // 20: max length
-            $query = "INSERT INTO users (user_id, user_name, password) VALUES ('$user_id', '$user_name', '$password')";
-            mysqli_query($con, $query);
-
-            // after signup user is redirected to login page
-            header("Location: login.php");
-            die;
-        }else {
-            echo "Please enter valid information ";
-        }
-
-    }
-
+if (isset($_SESSION['user_id'])  && !empty($_SESSION['user_id']) ) {
+    header("Location: index.php");
+}
 ?>
 
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Signup</title>
-</head>
-<body>
-<div>
-
-    <form method="post">
-        <span>Signup</span>
-        Username:<input type="text" name="user_name"><br><br>
-        Password:<input type="password" name="password"><br><br>
-        <input type="submit" value="Login"><br><br>
-        <a href="login.php">Click to login</a>
+<div class="container mt-5" style=" min-width: 600px; max-width: 50%;">
+    <?php
+    if (isset($_SESSION['signupErr']) && !empty($_SESSION['signupErr'])) {
+        echo "<p class='alert-danger' style='background-color: white;'>" . $_SESSION['signupErr'] . "</p>";
+    }
+    ?>
+    <form action="add_user.php" method="post">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
+            </div>
+            <input type="text" class="form-control" name="username" placeholder="Username">
+        </div>
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
+            <input value="Show password" type="button" onclick="changeVisibility('password')" style="margin-left:1px" >
+        </div>
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" name="password_rpt" id="password_rpt" placeholder="Please enter your password again" >
+            <input value="Show password" type="button" onclick="changeVisibility('password_rpt')" style="margin-left:1px" >
+        </div>
+        <input type="submit" value="Kaydol">
+        <span class="ms-2">Hesabınız var mı?</span><a class="link-primary ms-1" href="login.php">Giriş yapın</a>
     </form>
-
 </div>
-</body>
-</html>
+
+
+<script src="js/login-script.js" type="text/javascript"></script>
+
+<?php
+
+
+include('layout/bottom.php');
+?>
