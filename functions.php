@@ -65,11 +65,19 @@ function acc_details() {
 
     $row = $result->fetch_assoc();
 
-    echo
-    '<table class="table table-striped" style="max-width: 50%">
+    if($result->num_rows>0) {
+        echo
+            '<table class="table table-striped" style="max-width: 50%">
         <tr><th>User ID</th><th>User Name</th><th>Balance</th></tr>
-        <tr><td>'.$row["user_id"].'</td><td>'.$row["user_name"].'</td><td>'.$row["balance"].'</td></tr>
+        <tr><td>' . $row["user_id"] . '</td><td>' . $row["user_name"] . '</td><td>' . $row["balance"] . '</td></tr>
     </table>';
+    } else{
+        $_SESSION['user_id'] = null;
+        $_SESSION['user_name'] = null;
+        header("Location: index.php");
+        die();
+    }
+
 }
 
 function random_num($length): int
