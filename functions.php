@@ -7,45 +7,44 @@ function connect_to_db () {
     $DATABASE_USER = "root";
     $DATABASE_PASS = "";
     $DATABASE_NAME = "yemek_torbasi";
-    $conn = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-    return $conn;
+    return mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 }
 
-function check_login()
+function check_login() :void
 {
     $conn = connect_to_db();
     $username = "";
+    $ent_password = filterInput($_POST['password']);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     $sql = $conn->prepare("SELECT user_id,user_name,password FROM users WHERE user_name=? LIMIT 1");
     $sql->bind_param("s", $username);
-    $username = $_POST['username'];
+    $username = filterInput($_POST['username']);
     $sql->execute();
 
     $result = $sql->get_result();
 
     $row = $result->fetch_assoc();
-    if ($row['password'] === $_POST['password']) {
+
+    if (password_verify($ent_password, $row['password']) ) {
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['user_name'] = $row['user_name'];
-        $_SESSION['loginErr'] = null;
-        $_SESSION['signupErr'] = null;
+        unset($_SESSION['loginErr']);
+        unset($_SESSION['signupErr']);
+        $sql->free_result();
+        $conn->close();
         header("Location: index.php");
         die();
     } else {
         $_SESSION['user_id'] = null;
         $_SESSION['user_name'] = null;
         $_SESSION['loginErr']="Wrong username and/or password";
-        header("Location: login.php");
+        $sql->free_result();
+        $conn->close();
+        header("Location: login.php?alert=2"); // alert 2 means wrong password or username
         die("Wrong username and/or password");
     }
-
-
-
-    $sql->free_result();
-    $conn->close();
-
 }
 
 function acc_details() {
@@ -58,7 +57,7 @@ function acc_details() {
     }
     $sql = $conn->prepare("SELECT user_id,user_name,balance FROM users WHERE user_name=? LIMIT 1");
     $sql->bind_param("s", $username);
-    $username = $_SESSION['user_name'];
+    $username = filterInput($_SESSION['user_name']);
     $sql->execute();
 
     $result = $sql->get_result();
@@ -97,4 +96,13 @@ function random_num($length): int
 
 function phpAlert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+
+function filterInput($input) : string {
+
+    $input = trim($input);
+    $input = htmlspecialchars($input);
+    $input = stripslashes($input);
+
+    return $input;
 }

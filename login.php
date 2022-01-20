@@ -1,12 +1,16 @@
 <?php
 include 'functions.php';
 
-// To all pages you want to check the user logged in put the lines above.
 $page_name= "Login";
 include 'layout/top.php';
 
 if (isset($_SESSION['user_id'])  && !empty($_SESSION['user_id']) ) {
     header("Location: index.php");
+    die();
+}
+if (isset($_SESSION['signupSuccess'])  && $_SESSION['signupSuccess'] == true ) {
+    phpAlert("Signup successful. Now you can login.");
+    $_SESSION['signupSuccess']=null;
 }
 ?>
 
