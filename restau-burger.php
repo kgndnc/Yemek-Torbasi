@@ -4,9 +4,9 @@ include 'functions.php';
 $table = $_SESSION['table'] = 'burger-0001';
 
 $conn = connect_to_db();
-$sql = $conn->prepare("SELECT * FROM `burger-0001` ORDER BY `total_sale` ASC");
+$sql = $conn->prepare("SELECT * FROM `" . $table ."` ORDER BY `total_sale` ASC;");
 //$orderby = `total_sale`;
-//$sql->bind_param("ss", $table,$orderby);
+//$sql->bind_param("s", $table);
 $sql->execute();
 $result = $sql->get_result();
 

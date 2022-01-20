@@ -1,22 +1,38 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Patisserie</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
 <?php
+include 'functions.php';
+
+$table = $_SESSION['table'] = 'patiss-0001';
+
+$conn = connect_to_db();
+$sql = $conn->prepare("SELECT * FROM `" . $table ."` ORDER BY `total_sale` ASC;");
+
+$sql->execute();
+$result = $sql->get_result();
+$page_name = "Patisserie";
+
 include 'layout/top.php';
 ?>
+<div class="container mt-4">
+    <h2>Ürünlerimiz</h2>
+    <div class="products">
+        <?php  while ($food_for_sale = $result->fetch_assoc()): ?>
+            <div class="restau-box">
+                <a href="product.php?id=<?=$food_for_sale['id'] ?>" class="product">
+                    <!--                <img src="img/--><?//=$product['food_name']?><!--" width="200" height="200" alt="--><?//=$product['name']?><!--">-->
+                    <span class=""><?=$food_for_sale['food_name'] ?></span>
+                    <span class="">
+                <?=$food_for_sale['price'];?> TL
+                <?php echo "<br>" ?>
+            </span>
+                </a>
+            </div>
 
+        <?php endwhile; ?>
+    </div>
+</div>
 
 
 
 <?php
 include 'layout/bottom.php';
 ?>
-</body>
-</html>
