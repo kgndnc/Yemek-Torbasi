@@ -1,37 +1,40 @@
 <?php
-session_start();
 $page_name = "Ürün";
-$title = "<title>$page_name | Yemek Torbası</title>";
-$style = '<link rel="stylesheet" href="css/style.css">';
+
 include 'layout/top.php';
 include_once 'functions.php';
-$pdo = pdo_connect_mysql();
-echo $_SESSION['table'];
-echo $_GET['id'];
-$id =  $_GET['id'];
+$conn = connect_to_db();
+
+echo $_SESSION['table'] ."<br>";
+echo $_GET['id']."<br>";
+$id =  filterInput($_GET['id']);
 echo 'SELECT * FROM `' . $_SESSION['table'] . '` WHERE id=' .$id;
 // Check to make sure the id parameter is specified in the URL
+
 if (isset($_GET['id']) && isset($_SESSION['table'])) {
     // Prepare statement and execute, prevents SQL injection
 
-    $stmt = $pdo->prepare('SELECT * FROM `' . $_SESSION['table'] . '` WHERE id=' .$id);
+    $stmt = $conn->prepare("SELECT * FROM `" . $_SESSION['table'] . "` WHERE id=? LIMIT 1");
+    $stmt->bind_param("i",$id);
     $stmt->execute();
     // Fetch the product from the database and return the result as an Array
-    $food_for_sale = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->get_result();
     // Check if the product exists (array is not empty)
-    if (!$food_for_sale) {
+    if (!$result) {
         // Simple error to display if the id for the product doesn't exists (array is empty)
         exit('Product does not exist!');
     }
+    $food_for_sale = $result->fetch_assoc();
 } else {
     // Simple error to display if the id wasn't specified
     exit('Product does not exist!');
 }
+echo print_r($food_for_sale)
 ?>
 <div class="container mt-4">
     <div class="products">
 
-        <div class="restau-box">
+        <div class="box">
             <a href="index.php?page=product&id=<?=$food_for_sale['id']?>" class="product">
                 <!--                <img src="img/--><?//=$product['food_name']?><!--" width="200" height="200" alt="--><?//=$product['name']?><!--">-->
                 <span class=""><?=$food_for_sale['food_name']?></span>
