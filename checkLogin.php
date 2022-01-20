@@ -1,7 +1,7 @@
 <?php
 include "functions.php";
 
-function check_login() :void
+function check_login() : void
 {
     $conn = connect_to_db();
     $username = "";
@@ -37,3 +37,4 @@ function check_login() :void
         die("Wrong username and/or password");
     }
 }
+check_login();

@@ -1,9 +1,7 @@
 <?php
-//session_start();
 // Include functions.php and connect to the database
 include 'functions.php';
 
-//$pdo = pdo_connect_mysql();
 
 $page_name = "Anasayfa";
 include 'layout/top.php';
@@ -39,7 +37,7 @@ include 'layout/top.php';
     </div>
 
     <div class="row row-cols-3">
-        <div class="restau-box">
+        <div class="restau-box col border">
             Steakhouse
             <div class="restau-img mt-2">
                 <img src="img/burger.jpg" alt="">
@@ -53,4 +51,3 @@ include 'layout/top.php';
 <?php
 include('layout/bottom.php');
 ?>
-

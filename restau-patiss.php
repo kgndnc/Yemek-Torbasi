@@ -16,7 +16,7 @@ include 'layout/top.php';
     <h2>Ürünlerimiz</h2>
     <div class="products">
         <?php  while ($food_for_sale = $result->fetch_assoc()): ?>
-            <div class="restau-box">
+            <div class="box">
                 <a href="product.php?id=<?=$food_for_sale['id'] ?>" class="product">
                     <!--                <img src="img/--><?//=$product['food_name']?><!--" width="200" height="200" alt="--><?//=$product['name']?><!--">-->
                     <span class=""><?=$food_for_sale['food_name'] ?></span>
