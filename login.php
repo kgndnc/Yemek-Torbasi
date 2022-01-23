@@ -20,7 +20,12 @@ if (isset($_SESSION['signupSuccess'])  && $_SESSION['signupSuccess'] == true ) {
     if (isset($_SESSION['loginErr'])  && !empty($_SESSION['loginErr']) ) {
         echo "<p class='alert-danger' style='background-color: white;'>".$_SESSION['loginErr']."</p>";
     }
+    if (isset($_GET['alert']) && $_GET['alert'] == 4) {
+        echo "<p class='alert-danger' style='background-color: white;'>Sipariş vermek 
+                için giriş yapmalisiniz.</p>";
+    }
     ?>
+
     <form action="checkLogin.php" method="post">
         <div class="input-group mb-3">
             <div class="input-group-prepend">

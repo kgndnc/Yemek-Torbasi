@@ -1,14 +1,13 @@
 <?php
-$page_name = "Ürün";
-
-include 'layout/top.php';
 include_once 'functions.php';
+
+$page_name = "Ürün";
+include 'layout/top.php';
 $conn = connect_to_db();
 
-echo $_SESSION['table'] ."<br>";
-echo $_GET['id']."<br>";
+
 $id =  filterInput($_GET['id']);
-echo 'SELECT * FROM `' . $_SESSION['table'] . '` WHERE id=' .$id;
+
 // Check to make sure the id parameter is specified in the URL
 
 if (isset($_GET['id']) && isset($_SESSION['table'])) {
@@ -29,7 +28,7 @@ if (isset($_GET['id']) && isset($_SESSION['table'])) {
     // Simple error to display if the id wasn't specified
     exit('Product does not exist!');
 }
-echo print_r($food_for_sale)
+
 ?>
 <div class="container mt-4">
     <div class="products">
@@ -47,6 +46,7 @@ echo print_r($food_for_sale)
         <form action="cart.php" method="post">
             <input type="number" class="mt-4" name="quantity" value="1" min="1" max="<?=$food_for_sale['quantity']?>" placeholder="Quantity" required>
             <input type="submit" value="Add To Cart">
+            <input type="text" style="visibility: hidden" name="food_name" value="<?=$food_for_sale['food_name']?>">
             <input type="number" style="visibility: hidden" name="id" value="<?=$food_for_sale['id']?>">
             <input type="text" style="visibility: hidden" name="table" value="<?=$_SESSION['table']?>">
         </form>

@@ -21,7 +21,7 @@ include 'layout/top.php';
 
         <div class="restau-box col">
             Pizza Place
-            <div class="restau-img mt-2">
+            <div class="restau-img mt-5">
                 <img src="img/pizza.png" alt="">
             </div>
             <button type="button" class="btn btn-primary mt-5"  onclick="document.location='restau-pizza.php'">Ürünleri Listele</button>
@@ -30,7 +30,7 @@ include 'layout/top.php';
         <div class="restau-box col">
             Patisserie
             <div class="restau-img mt-2">
-                <img src="img/burger.jpg" alt="">
+                <img src="img/patiss.png" alt="">
             </div>
             <button type="button" class="btn btn-primary mt-3"  onclick="document.location='restau-patiss.php'">Ürünleri Listele</button>
         </div>
@@ -40,7 +40,7 @@ include 'layout/top.php';
         <div class="restau-box col border">
             Steakhouse
             <div class="restau-img mt-2">
-                <img src="img/burger.jpg" alt="">
+                <img src="img/steak.jpg" alt="">
             </div>
             <button type="button" class="btn btn-primary mt-2"  onclick="document.location='restau-steakhouse.php'">Ürünleri Listele</button>
         </div>
