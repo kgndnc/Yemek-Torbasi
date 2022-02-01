@@ -13,5 +13,5 @@ User passwords inserted to the database after hashing them. Bcrypt algorithm was
 Languages: HTML, CSS, JavaScript, PHP <br>
 Server: Apache <br>
 Tools/IDEs: XAMPP v3.3.0, JetBrains PhpStorm 2021.3.1 <br>
-Framework: Bootstrap <br>
+Css Framework: Bootstrap <br>
 Database: MariaDB <br>
