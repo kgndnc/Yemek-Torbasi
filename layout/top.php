@@ -22,7 +22,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav nav-item">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="cart.php">Sepet</a>
+                    <a class="nav-link active" aria-current="page" href="show_cart.php">Sepet</a>
                 </div>
             </li>
             <li class="nav-item">
