@@ -1,7 +1,7 @@
 # Yemek Torbası
 
-Yemek Torbasi (Food Bag) is a simple food ordering website written in PHP 8.1 as the server-side scripting language. <br>
-I'm not a professional web developer therefore there might be some mistakes or the project may contain code that is poorly written in a way that is not generally considered good practice. <br>
+Yemek Torbasi (Food Bag) is a simple food ordering website written in PHP 8.1. <br>
+I'm not a professional web developer therefore there might be some mistakes or the project may contain code that is written in a way that is not generally considered good practice. <br>
 This project's main goal is to learn the basics of frontend and backend web development, database management, SQL syntax, PHP and various other tools (eg. XAMPP).
 
 ### Measures Taken Against Malicious User Inputs
